@@ -16,10 +16,10 @@ server.route({
     }
 });
 server.route({
-    method: 'GET',
-    path: '/{name}',
+    method: 'POST',
+    path: '/',
     handler: function (request, reply) {
-        reply('Hello, ' + encodeURIComponent(request.params.name) + '!');
+        reply('Here!');
     }
 });
 
