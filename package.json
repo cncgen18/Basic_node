@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^7.5.2",
-    "good": "*"
+    "good": "^4.0.0",
+    "good-console": "^2.0.1",
+    "hapi": "^7.5.2"
   }
 }
