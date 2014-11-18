@@ -19,7 +19,8 @@ server.route({
     method: 'POST',
     path: '/',
     handler: function (request, reply) {
-        reply('Here!');
+    	var user =  JSON.stringify(request.payload.login);
+        reply('<html><head></head><body><p>Hello ' + user + '!!</p></body></html>');
     }
 });
 
