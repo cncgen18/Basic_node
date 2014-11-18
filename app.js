@@ -12,7 +12,7 @@ server.route({
     path: '/',
     handler: function (request, reply) {
 
-        reply('<html><head><title>Login</title></head><body><form method="post"><p><input type="text" name="login" value="" placeholer"Username"></p><p><input type="password" name="password" value="" placeholder="password"></p><p class="submit"><input type="submit" name="commit" value="Login"></p></form></body></html>');
+        reply('<html><head><title>Login</title></head><body><form method="post"><p><input type="text" name="login" value="" placeholer="Username"></p><p><input type="password" name="password" value="" placeholder="password"></p><p class="submit"><input type="submit" name="commit" value="Login"></p></form></body></html>');
     }
 });
 server.route({
