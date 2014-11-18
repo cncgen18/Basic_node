@@ -20,7 +20,8 @@ server.route({
     path: '/',
     handler: function (request, reply) {
     	var user =  JSON.stringify(request.payload.login);
-        reply('<html><head></head><body><p>Hello ' + user + '!!</p></body></html>');
+    	var pass = JSON.stringify(request.payload.password);
+        reply('<html><head></head><body><p>Hello ' + user + '!!</p><p>Your password is : ' + pass + '</p></body></html>');
     }
 });
 
