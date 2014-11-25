@@ -5,7 +5,7 @@ var Good = require('good');
 var server = new Hapi.Server('localhost', 8000);
 
 var users = {
-    Mike: {
+    mweyman: {
         id: 'mweyman',
         password: 'password',
         name: 'Michael Weyman'
@@ -82,42 +82,42 @@ var logout = function (request, reply) {
 };
 
 // Add the route
-server.route({
-    method: 'GET',
-    path: '/',
-    config: {
-        handler: Login,
-        auth: 'session'
-    }
-});
-
-server.route({
-    method: 'POST',
-    path: '/Login',
-    config: {
-        handler: home,
-        auth: {
-            mode: 'try',
-            strategy: 'session'
-        },
-        plugins: {
-            'hapi-auth-cookie':{
+server.route([
+    {
+        method: 'GET',
+        path: '/',
+        config: {
+            handler: home,
+            auth: 'session'
+        }
+    },
+    {
+        method: ['GET', 'POST'],
+        path: '/login',
+        config: {
+            handler: login,
+            auth: {
+                mode: 'try',
+                strategy: 'session'
+            },
+            plugins: {
+                'hapi-auth-cookie':{
                 redirectTo: false
+                }
             }
         }
+    },
+    {
+        method: 'GET',
+        path: '/logout',
+        config: {
+            handler: logout,
+            auth: 'session'
+        }
     }
-});
+    ]);
 
-server.route({
-    method: 'GET',
-    path: '/logout',
-    config: {
-        handler: logout,
-        auth: 'session'
-    }
-})
-
-server.pack.register({
+/*server.pack.register({
     plugin: Good,
     options: {
         reporters: [{
@@ -129,7 +129,7 @@ server.pack.register({
     if (err) {
         throw err; // something bad happened loading the plugin
     }
-
+*/
 
 // Start the server
 	server.start(function () {
