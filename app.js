@@ -21,10 +21,6 @@ server.pack.register(require('hapi-auth-cookie'), function (err) {
         isSecure: false
     });
 
-//var home = function (request,reply){
-//    reply('<html><head><title>Login</title></head><body><form method="post"><p><input type="text" name="login" value="" placeholer="Username"></p><p><input type="password" name="password" value="" placeholder="password"></p><p class="submit"><input type="submit" name="commit" value="Login"></p></form></body></html>');
-//};
-
 var home = function (request, reply) {
 
     reply('<html><head><title>Login page</title></head><body><h3>Welcome '
