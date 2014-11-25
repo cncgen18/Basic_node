@@ -8,7 +8,14 @@ var users = {
     mweyman: {
         id: 'mweyman',
         password: 'password',
-        name: 'Michael Weyman'
+        name: 'Michael Weyman',
+        role: 'Admin'
+    },
+    john: {
+        id: 'john',
+        password: 'password',
+        name: 'John Doe',
+        role: 'user'
     }
 };
 
@@ -22,14 +29,22 @@ server.pack.register(require('hapi-auth-cookie'), function (err) {
     });
 
 var home = function (request, reply) {
-
-    reply('<html><head><title>Login page</title></head><body><h3>Welcome '
-      + request.auth.credentials.name
-      + '!</h3><br/><form method="get" action="/logout">'
-      + '<input type="submit" value="Logout">'
-      + '</form></body></html>');
+    if(request.auth.credentials.role == 'Admin'){
+        reply('<html><head><title>Login page</title></head><body><h3>Welcome '
+            + request.auth.credentials.name
+            + '!</h3><br/><p>You are the Admin!</p><br/>'
+            + '<form method="get" action="/logout">'
+            + '<input type="submit" value="Logout">'
+            + '</form></body></html>');
+    }
+    else{
+        reply('<html><head><title>Login page</title></head><body><h3>Welcome '
+            + request.auth.credentials.name
+            + '!</h3><br/><form method="get" action="/logout">'
+            + '<input type="submit" value="Logout">'
+            + '</form></body></html>');
+        }
 };
-
 var login = function (request, reply) {
 
     if (request.auth.isAuthenticated) {
