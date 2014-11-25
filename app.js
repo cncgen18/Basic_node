@@ -4,7 +4,22 @@ var Good = require('good');
 // Create a server with a host and port
 var server = new Hapi.Server('localhost', 8000);
 
+var users = {
+    Mike: {
+        id: 'mweyman',
+        password: 'password',
+        name: 'Michael Weyman'
+    }
+};
 
+server.pack.register(require('hapi-auth-cookie'), function (err) {
+
+    server.auth.strategy('session', 'cookie', {
+        password: 'secret',
+        cookie: 'sid-example',
+        redirectTo: '/login',
+        isSecure: false
+    });
 
 // Add the route
 server.route({
@@ -19,8 +34,8 @@ server.route({
     method: 'POST',
     path: '/',
     handler: function (request, reply) {
-    	var user =  JSON.stringify(request.payload.login);
-    	var pass = JSON.stringify(request.payload.password);
+    	var user = request.auth.credentials.name;
+    	var pass = request.auth.credentials.password;
         reply('<html><head></head><body><p>Hello ' + user + '!!</p><p>Your password is : ' + pass + '</p></body></html>');
     }
 });
